@@ -5,10 +5,10 @@ import { EyebrowBadge } from "@/components/ui/EyebrowBadge";
 import { AnimatedItem, AnimatedSection } from "@/components/ui/AnimatedSection";
 
 const telemetry = [
-  { label: "Suit Integrity", value: "99.2%", note: "Nanoparticle lattice" },
-  { label: "Arc Output", value: "3.4 GJ/s", note: "Cold-fused, Vibranium core" },
-  { label: "Flight Ceiling", value: "72.8 km", note: "Stratospheric assist" },
-  { label: "Response Time", value: "0.018 s", note: "Neural link, J.A.R.V.I.S." },
+  { label: "Целостность костюма", value: "99.2%", note: "Наночастичная решетка" },
+  { label: "Выход реактора", value: "3.4 ГДж/с", note: "Холодный синтез, вибраниевое ядро" },
+  { label: "Потолок полета", value: "72.8 км", note: "Стратосферная поддержка" },
+  { label: "Время отклика", value: "0.018 с", note: "Нейросвязь, ДЖ.А.Р.В.И.С." },
 ];
 
 export function SystemsNominal() {
@@ -20,20 +20,20 @@ export function SystemsNominal() {
       <div className="mx-auto flex max-w-[1400px] flex-col gap-16 md:grid md:grid-cols-[5fr_4fr] md:gap-20">
         <AnimatedSection className="flex flex-col gap-8">
           <AnimatedItem>
-            <EyebrowBadge>J.A.R.V.I.S. // SYSTEMS NOMINAL</EyebrowBadge>
+            <EyebrowBadge>ДЖ.А.Р.В.И.С. // СИСТЕМЫ В НОРМЕ</EyebrowBadge>
           </AnimatedItem>
           <AnimatedItem>
             <h2 className="max-w-[16ch] font-sans text-4xl font-semibold leading-[0.98] tracking-tighter text-foreground md:text-6xl">
-              &ldquo;And I&hellip; am&hellip;{" "}
-              <span className="text-accent">Iron Man.</span>&rdquo;
+              &ldquo;А я&hellip;{" "}
+              <span className="text-accent">Железный человек.</span>&rdquo;
             </h2>
           </AnimatedItem>
           <AnimatedItem>
             <p className="max-w-[48ch] font-sans text-base leading-relaxed text-zinc-400 md:text-lg">
-              A snap heard around the universe. The Mark LXXXV was engineered in
-              six hours and retired in seconds &mdash; its final moment, the
-              reason any of us are still here. Every readout below is what
-              J.A.R.V.I.S. logged in the last frame before the blast.
+              Щелчок, который услышала вся Вселенная. Марк LXXXV был собран за
+              шесть часов и ушел в историю за секунды: его последний миг стал
+              причиной, по которой мы все еще здесь. Ниже - показания, которые
+              ДЖ.А.Р.В.И.С. записал в последнем кадре перед вспышкой.
             </p>
           </AnimatedItem>
           <AnimatedItem>
@@ -41,7 +41,7 @@ export function SystemsNominal() {
               href="#footer"
               className="group inline-flex items-center gap-2 self-start rounded-full border border-white/15 bg-white/[0.04] px-5 py-2.5 font-mono text-[11px] font-medium uppercase tracking-[0.22em] text-foreground backdrop-blur-md transition-all duration-200 hover:bg-white/[0.08] active:translate-y-[1px]"
             >
-              Open Suit Archive
+              Открыть архив костюма
               <ArrowUpRight
                 size={14}
                 weight="bold"

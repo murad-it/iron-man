@@ -5,6 +5,9 @@ import { EyebrowBadge } from "@/components/ui/EyebrowBadge";
 import { HudFrame } from "@/components/ui/HudFrame";
 import { DIALOGUES, FRAME_COUNT, HERO_TEXT_FADE_END, framePath } from "@/lib/hero";
 
+const TEXT_SCALE = 1.5;
+const DIALOGUE_CARD_SCALE = 1.5;
+
 export function Hero() {
   const sectionRef = useRef<HTMLElement | null>(null);
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
@@ -146,13 +149,13 @@ export function Hero() {
         if (heroTextRef.current) {
           const opacity = Math.max(0, 1 - progress / HERO_TEXT_FADE_END);
           heroTextRef.current.style.opacity = String(opacity);
-          heroTextRef.current.style.transform = `translateY(${(1 - opacity) * 12}px)`;
+          heroTextRef.current.style.transform = `translateY(${(1 - opacity) * 12}px) scale(${TEXT_SCALE})`;
         }
 
         if (bigLeftTextRef.current) {
           const op = Math.min(1, Math.max(0, (progress - 0.1) / 0.08));
           bigLeftTextRef.current.style.opacity = String(op);
-          bigLeftTextRef.current.style.transform = `translateY(${(1 - op) * 14}px)`;
+          bigLeftTextRef.current.style.transform = `translateY(${(1 - op) * 14}px) scale(${TEXT_SCALE})`;
         }
 
         if (progressFillRef.current) {
@@ -217,49 +220,64 @@ export function Hero() {
         <div
           ref={heroTextRef}
           className="absolute inset-x-0 bottom-0 z-10 flex flex-col items-start gap-5 px-6 pb-24 md:px-12 md:pb-28"
-          style={{ transition: "opacity 80ms linear" }}
+          style={{
+            transition: "opacity 80ms linear",
+            transform: `scale(${TEXT_SCALE})`,
+            transformOrigin: "left bottom",
+          }}
         >
-          <EyebrowBadge>MARK LXXXV // STARK INDUSTRIES // ONLINE</EyebrowBadge>
+          <EyebrowBadge>
+            <span className="md:hidden">МАРК LXXXV // В СЕТИ</span>
+            <span className="hidden md:inline">МАРК LXXXV // СТАРК ИНДАСТРИЗ // В СЕТИ</span>
+          </EyebrowBadge>
           <h1 className="max-w-[14ch] font-sans text-5xl font-semibold leading-[0.95] tracking-tighter text-foreground md:text-7xl lg:text-8xl">
-            I am
-            <br />
-            <span className="text-accent">Iron Man.</span>
+            <span className="block whitespace-nowrap">
+              Я&nbsp;-&nbsp;<span className="text-accent">железный</span>
+            </span>
+            <span className="block text-accent">человек.</span>
           </h1>
           <p className="max-w-[42ch] font-sans text-sm leading-relaxed text-zinc-400 md:text-base">
-            Mark LXXXV nanotech suit. Arc reactor calibrated. Scroll to run a full
-            system diagnostic — J.A.R.V.I.S. is holding on the line.
+            Нанотехнологичный костюм Марк LXXXV. Дуговой реактор откалиброван.
+            Прокрутите, чтобы запустить полную диагностику систем - ДЖ.А.Р.В.И.С.
+            остается на связи.
           </p>
         </div>
 
         <div
           ref={bigLeftTextRef}
           className="pointer-events-none absolute bottom-24 left-6 z-10 hidden max-w-[58%] flex-col gap-5 md:flex md:bottom-28 md:left-12"
-          style={{ opacity: 0, transition: "opacity 80ms linear" }}
+          style={{
+            opacity: 0,
+            transition: "opacity 80ms linear",
+            transform: `scale(${TEXT_SCALE})`,
+            transformOrigin: "left bottom",
+          }}
         >
           <span className="inline-flex items-center gap-2.5 font-mono text-[10px] uppercase tracking-[0.3em] text-accent">
             <span aria-hidden className="inline-block h-1.5 w-1.5 rounded-full bg-accent shadow-[0_0_10px_rgba(212,162,47,0.85)]" />
-            Protocol &mdash; Mk LXXXV
+            Протокол &mdash; Мк LXXXV
           </span>
-          <h2 className="font-sans font-semibold leading-[0.88] tracking-tighter text-foreground text-[clamp(4rem,9.5vw,9rem)]">
-            Build
+          <h2 className="max-w-[14ch] font-sans text-5xl font-semibold leading-[0.95] tracking-tighter text-foreground md:text-7xl lg:text-8xl">
+            Будь впереди
             <br />
-            with <span className="text-accent">Devini</span>
+            с <span className="text-accent">нашей командой</span>
           </h2>
           <p className="max-w-[36ch] font-mono text-[11px] uppercase tracking-[0.22em] text-zinc-400">
-            Interfaces &amp; products, engineered like the Mark LXXXV.
+            Найдем любые решения для вашего бизнеса, отберем самое лучшее и
+            внедрим за обговоренные сроки.
           </p>
         </div>
 
-        <div className="pointer-events-none absolute left-6 top-20 z-10 flex items-center gap-2 md:left-10 md:top-24">
+        <div className="pointer-events-none absolute left-6 top-20 z-10 hidden items-center gap-2 sm:flex md:left-10 md:top-24">
           <div className="h-px w-8 bg-accent/60" />
           <span className="font-mono text-[10px] uppercase tracking-[0.32em] text-zinc-400">
-            Telemetry Link &mdash; Live
+            Канал телеметрии &mdash; активен
           </span>
         </div>
 
-        <div className="pointer-events-none absolute right-6 top-20 z-10 flex items-center gap-3 md:right-10 md:top-24">
+        <div className="pointer-events-none absolute right-6 top-20 z-10 hidden items-center gap-3 sm:flex md:right-10 md:top-24">
           <span className="font-mono text-[10px] uppercase tracking-[0.32em] text-zinc-400">
-            Arc Reactor
+            Дуговой реактор
           </span>
           <span
             ref={powerReadoutRef}
@@ -278,10 +296,10 @@ export function Hero() {
               style={{ transform: "scaleX(0)", transition: "transform 80ms linear" }}
             />
           </div>
-          <div className="mx-6 flex items-center justify-between pb-4 font-mono text-[10px] uppercase tracking-[0.28em] text-zinc-500 md:mx-10">
-            <span>SEQ 001 / 169</span>
-            <span>J.A.R.V.I.S. // DIAGNOSTIC</span>
-            <span>Scroll &darr;</span>
+          <div className="mx-6 flex flex-col gap-1 pb-4 pl-12 font-mono text-[10px] uppercase tracking-[0.2em] text-zinc-500 sm:flex-row sm:items-center sm:justify-between sm:pl-0 md:mx-10 md:tracking-[0.28em]">
+            <span>КАДР 001 / 169</span>
+            <span>ДЖ.А.Р.В.И.С. // ДИАГНОСТИКА</span>
+            <span>Прокрутка &darr;</span>
           </div>
         </div>
 
@@ -297,6 +315,10 @@ export function Hero() {
             <div
               key={d.id}
               className={`pointer-events-none absolute ${position} z-20 hidden w-[420px] max-w-[90vw] md:block`}
+              style={{
+                transform: `scale(${DIALOGUE_CARD_SCALE})`,
+                transformOrigin: "right center",
+              }}
             >
               <figure
                 className={`card-surface pointer-events-auto p-6 transition-all duration-400 ease-out ${
@@ -347,7 +369,7 @@ export function Hero() {
 
         {!loaded && (
           <div className="absolute inset-0 z-30 flex flex-col items-center justify-center gap-5 bg-background px-6">
-            <EyebrowBadge>SUIT UP PROTOCOL // BOOTING</EyebrowBadge>
+            <EyebrowBadge>ПРОТОКОЛ СБОРКИ // ЗАПУСК</EyebrowBadge>
             <div className="h-px w-60 bg-white/10 md:w-80">
               <div
                 className="h-full bg-accent transition-[width] duration-150 ease-out"
@@ -355,7 +377,7 @@ export function Hero() {
               />
             </div>
             <p className="font-mono text-[11px] uppercase tracking-[0.28em] text-zinc-500">
-              Loading Mark LXXXV &nbsp;&middot;&nbsp; {Math.round(loadProgress * 100)}%
+              Загрузка Марк LXXXV &nbsp;&middot;&nbsp; {Math.round(loadProgress * 100)}%
             </p>
           </div>
         )}
